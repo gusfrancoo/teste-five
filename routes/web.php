@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::post('/upload', [UploadFileController::class, 'upload']);
+Route::post('/upload', [App\Http\Controllers\UploadFile::class, 'upload']);
 
 Auth::routes();
 
