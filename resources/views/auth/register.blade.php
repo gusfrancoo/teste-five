@@ -62,8 +62,8 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-6 mx-auto">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="div-button">
+                                <button type="submit" class="btn btn-custom btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -84,6 +84,13 @@
 
 .card-header{
     background-color: rgb(75 75 75) !important;
+}
+.div-button{
+    display: flex;
+    justify-content: center;
+}
+.btn-custom{
+    width: 35%;
 }
 
 </style>

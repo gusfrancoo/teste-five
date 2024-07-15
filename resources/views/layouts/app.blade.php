@@ -80,5 +80,9 @@
 </html>
 
 <style scoped>
+.dropdown-item:hover {
+    background-color: #ff5733 !important; /* Cor de fundo ao passar o mouse */
+    color: #ffffff !important; /* Cor do texto ao passar o mouse */
+}
 
 </style>
