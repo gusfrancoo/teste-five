@@ -49,6 +49,11 @@
                                 </li>
                             @endif
                         @else
+                            @if (auth()->user()->hasRole('admin') || auth()->user()->can('approve files'))
+                                <li class="nav-item">
+                                    <a class="nav-link"  style="color: white">Aprovar Arquivos</a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -66,6 +71,7 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
