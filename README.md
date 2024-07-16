@@ -1,6 +1,6 @@
 # Título do projeto
 
-Um parágrafo da descrição do projeto vai aqui
+Exercicio Prático utilizando Php - Laravel e Vue.Js
 
 ## 🚀 Começando
 
