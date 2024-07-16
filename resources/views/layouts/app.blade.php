@@ -11,6 +11,8 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
@@ -20,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light  shadow-sm" style="background-color: rgb(75 75 75)">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="color: white">
+                <a class="navbar-brand" href="{{ url('/home') }}" style="color: white">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -51,7 +53,7 @@
                         @else
                             @if (auth()->user()->hasRole('admin') || auth()->user()->can('approve files'))
                                 <li class="nav-item">
-                                    <a class="nav-link"  style="color: white">Aprovar Arquivos</a>
+                                    <a class="nav-link" href="{{route('files')}}" style="color: white">Aprovar Arquivos</a>
                                 </li>
                             @endif
                             <li class="nav-item dropdown">

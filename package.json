@@ -16,6 +16,8 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.5.2",
+        "@fortawesome/free-solid-svg-icons": "^6.5.2",
         "sweetalert2": "^11.12.2"
     }
 }

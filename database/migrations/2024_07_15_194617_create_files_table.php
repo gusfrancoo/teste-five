@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->tinyInteger('status'); //1- Pending, 2- Approved, 3- Rejected
+            $table->string('file_name');
+            $table->string('type');
+            $table->integer('size');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('file');
+        Schema::dropIfExists('files');
     }
 };
