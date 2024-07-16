@@ -52,9 +52,39 @@
                             @endif
                         @else
                             @if (auth()->user()->hasRole('admin') || auth()->user()->can('approve files'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('files')}}" style="color: white">Aprovar Arquivos</a>
-                                </li>
+
+                                @if(request()->is('home'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('files')}}" style="color: white">Aprovar Arquivos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('view-files')}}" style="color: white">Visualizar Arquivos</a>
+                                    </li>
+                                @elseif(request()->is('files'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('home')}}" style="color: white">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('view-files')}}" style="color: white">Visualizar Arquivos</a>
+                                    </li>
+                                @elseif(request()->is('view-files'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('home')}}" style="color: white">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('files')}}" style="color: white">Aprovar Arquivos</a>
+                                    </li>
+                                @endif
+                            @else
+                                @if (request()->is('view-files') && !auth()->user()->can('approve files'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('files')}}" style="color: white">Home</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('view-files')}}" style="color: white">Visualizar Arquivos</a>
+                                    </li>
+                                @endif
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -89,6 +119,10 @@
 
 <style scoped>
 .dropdown-item:hover {
+    background-color: #ff5733 !important; /* Cor de fundo ao passar o mouse */
+    color: #ffffff !important; /* Cor do texto ao passar o mouse */
+}
+.nav-link:hover{
     background-color: #ff5733 !important; /* Cor de fundo ao passar o mouse */
     color: #ffffff !important; /* Cor do texto ao passar o mouse */
 }

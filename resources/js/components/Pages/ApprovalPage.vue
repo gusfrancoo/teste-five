@@ -21,7 +21,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="file in files">
+                                    <tr v-for="file in files" :key="file.id">
                                         <td class="text-nowrap text-center">
                                             {{ file.file_name }}
                                         </td>
@@ -29,18 +29,18 @@
                                             {{ file.type }}
                                         </td>
                                         <td class="text-nowrap text-center">
-                                            {{ file.size }}
+                                            {{ file.size }}B
                                         </td>
                                         <td class="text-center">
                                             {{ file.user_id }}
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" @click="" class="btn btn-sm btn-success">
+                                            <button type="button" @click="approveFile(file)" class="btn btn-sm btn-success">
                                                 <i class="fas fa-check"></i>
                                             </button>
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" @click="" class="btn btn-sm btn-danger">
+                                            <button type="button" @click="rejectFile(file)" class="btn btn-sm btn-danger">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </td>
@@ -64,10 +64,77 @@ import Swal from 'sweetalert2';
 export default {
     props: {
         files: {
-            type: String,
             required: true
         }
+    },
+    data(){
+        return {
+        }
+    },
+    methods: {
+        approveFile(file){
+            axios.post('/approve', file)
+            .then(async response => {
+                console.log(response.data);
+                if (response.data.code === 200){
+                    await Swal.fire({
+                        title: 'Sucesso!',
+                        text: response.data.message,
+                        icon: 'success',
+                        confirmButtonText: 'Ok!'
+                    })
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: response.data.message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok.'
+                    })
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao processar requisição.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok!'
+                });
+            })
+        },
+
+        rejectFile(file){
+            axios.post('/reject', file)
+            .then(async response => {
+                if (response.data.code === 200){
+                    await Swal.fire({
+                        title: 'Sucesso!',
+                        text: response.data.message,
+                        icon: 'success',
+                        confirmButtonText: 'Ok!'
+                    })
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: response.data.message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok.'
+                    })
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao processar requisição.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok!'
+                });
+            })
+        }
     }
+
+
 }
 
 </script>
@@ -79,13 +146,14 @@ export default {
     background-color: rgb(75 75 75) !important;
 }
 
-.card-header{
-    background-color: rgb(75 75 75) !important;
-}
 
 .text-custom {
     white-space: normal !important;
     word-wrap: break-word;
+}
+
+.card{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 
